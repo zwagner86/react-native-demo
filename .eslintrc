@@ -1,0 +1,12 @@
+{
+    "extends": "spothero",
+
+    "plugins": [
+        "react-native"
+    ],
+
+    "rules": {
+        "react/forbid-component-props": 0,
+        "react-native/no-color-literals": 0
+    }
+}
