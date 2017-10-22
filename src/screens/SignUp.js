@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {View, Image} from 'react-native';
+import {View, Image, Platform} from 'react-native';
 import {Card, Button, FormLabel, FormInput} from 'react-native-elements';
 import {onSignIn} from '../auth';
 
@@ -53,8 +53,9 @@ export default class SignUp extends Component {
         
                     <Button
                         buttonStyle={{marginTop: 20}}
-                        backgroundColor="#03A9F4"
+                        backgroundColor="#0082ff"
                         title="SIGN UP"
+                        borderRadius={Platform.OS === 'android' ? 0 : 50}
                         onPress={this._onSignUpButtonPress}
                     />
                     <Button

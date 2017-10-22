@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Platform,
     ScrollView,
     Text,
     View
@@ -10,6 +11,7 @@ import {
     FormLabel,
     FormInput
 } from 'react-native-elements';
+import AutocompleteInput from '../components/AutocompleteInput';
 
 const plates = [
     {
@@ -35,8 +37,16 @@ const plates = [
 ];
 
 export default class Search extends Component {
+    state = {
+        facilityInput: null
+    };
+
     _onSearchButtonPress = () => {
         console.log('search');
+    }
+
+    _onAutocompleteChange = text => {
+        console.log(text);
     }
 
     render() {
@@ -49,21 +59,32 @@ export default class Search extends Component {
                         placeholder="License Plate Number"
                     />
                     <FormLabel>Search Facilities</FormLabel>
-                    <FormInput
-                        secureTextEntry
+                    <AutocompleteInput
                         autoCapitalize="none"
                         placeholder="All Facilities"
+                        onChangeText={this._onAutocompleteChange}
                     />
                     <Button
                         buttonStyle={{marginTop: 20}}
-                        backgroundColor="#03A9F4"
+                        backgroundColor="#0082ff"
                         title="Search"
+                        borderRadius={Platform.OS === 'android' ? 0 : 50}
                         onPress={this._onSearchButtonPress}
                     />
                 </View>
                 <ScrollView contentContainerStyle={{paddingVertical: 20}}>
                     {plates.map(({rentalId, licensePlate, facilityTitle}) => (
                         <Card
+                            style={{
+                                marginVertical: 10,
+                                marginLeft: 20,
+                                marginRight: 20,
+                                padding: 20,
+                                shadowColor: '#000',
+                                shadowRadius: 3,
+                                shadowOffset: {width: 3, height: 3},
+                                shadowOpacity: 0.2
+                            }}
                             title={`PLATE: ${licensePlate}`}
                             key={rentalId}
                         >

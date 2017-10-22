@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {
+    Platform,
     View,
     Image
 } from 'react-native';
@@ -55,9 +56,9 @@ export default class SignIn extends Component {
         
                     <Button
                         buttonStyle={{marginTop: 20}}
-                        backgroundColor="#03A9F4"
+                        backgroundColor="#0082ff"
                         title="SIGN IN"
-                        borderRadius={50}
+                        borderRadius={Platform.OS === 'android' ? 0 : 50}
                         onPress={this._onButtonPress}
                     />
                     <Button
