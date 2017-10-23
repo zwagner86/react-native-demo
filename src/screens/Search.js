@@ -38,7 +38,10 @@ const plates = [
 
 export default class Search extends Component {
     state = {
-        facilityInput: null
+        facilityInput: null,
+        facilityInputText: '',
+        autoCompleteData: [],
+        showSearchButton: true
     };
 
     _onSearchButtonPress = () => {
@@ -47,12 +50,46 @@ export default class Search extends Component {
 
     _onAutocompleteChange = text => {
         console.log(text);
+        const newState = {
+            facilityInputText: text
+        };
+
+        if (text.length > 0) {
+            newState.showSearchButton = false;
+            newState.autoCompleteData = plates;
+        } else {
+            newState.showSearchButton = false;
+            newState.autoCompleteData = [];
+        }
+
+        this.setState(newState);
+    }
+
+    _onInputCleared = () => {
+        this.setState({
+            facilityInputText: '',
+            autoCompleteData: [],
+            showSearchButton: true
+        });
+    }
+
+    _onPredictionSelect = prediction => {
+        this.setState({
+            showSearchButton: true,
+            autoCompleteData: []
+        });
     }
 
     render() {
+        const {
+            showSearchButton,
+            facilityInputText,
+            autoCompleteData
+        } = this.state;
+
         return (
             <View style={{flex: 1}}>
-                <View style={{marginVertical: 20}}>
+                <View style={{marginVertical: 20, zIndex: 2}}>
                     <FormLabel>Search License Plate</FormLabel>
                     <FormInput
                         autoCapitalize="none"
@@ -61,16 +98,22 @@ export default class Search extends Component {
                     <FormLabel>Search Facilities</FormLabel>
                     <AutocompleteInput
                         autoCapitalize="none"
+                        value={facilityInputText}
+                        data={autoCompleteData}
                         placeholder="All Facilities"
                         onChangeText={this._onAutocompleteChange}
+                        onInputCleared={this._onInputCleared}
+                        onPredictionSelect={this._onPredictionSelect}
                     />
-                    <Button
-                        buttonStyle={{marginTop: 20}}
-                        backgroundColor="#0082ff"
-                        title="Search"
-                        borderRadius={Platform.OS === 'android' ? 0 : 50}
-                        onPress={this._onSearchButtonPress}
-                    />
+                    {showSearchButton &&
+                        <Button
+                            buttonStyle={{marginTop: 20}}
+                            backgroundColor="#0082ff"
+                            title="Search"
+                            borderRadius={Platform.OS === 'android' ? 0 : 50}
+                            onPress={this._onSearchButtonPress}
+                        />
+                    }
                 </View>
                 <ScrollView contentContainerStyle={{paddingVertical: 20}}>
                     {plates.map(({rentalId, licensePlate, facilityTitle}) => (

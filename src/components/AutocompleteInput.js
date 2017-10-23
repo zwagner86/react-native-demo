@@ -18,7 +18,6 @@ const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        position: 'relative',
         backgroundColor: 'grey',
         flexDirection: 'column',
         justifyContent: 'flex-start'
@@ -61,13 +60,14 @@ const styles = StyleSheet.create({
         marginRight: 5
     },
     listViewContainer: {
-        //position: 'absolute',
-        //top: 0,
         flex: 0
     },
     listView: {
+        //flex: 1,
+        zIndex: 1000,
         backgroundColor: 'white',
-        margin: 10
+        margin: 10,
+        position: 'absolute'
     },
     listItem: {
         padding: 10
@@ -77,28 +77,6 @@ const styles = StyleSheet.create({
         borderColor: 'lightgrey'
     }
 });
-const plates = [
-    {
-        rentalId: 8943647,
-        licensePlate: 'NEWMAN1',
-        facilityTitle: '21 E Cullerton St.  - Under EL'
-    },
-    {
-        rentalId: 8131279,
-        licensePlate: 'nerfths',
-        facilityTitle: '1315 S Plymouth Ct. - Personal Spot - Spot #4'
-    },
-    {
-        rentalId: 8765256,
-        licensePlate: 'N448100',
-        facilityTitle: '260 E Chestnut St.'
-    },
-    {
-        rentalId: 8863163,
-        licensePlate: 'N2TEETH',
-        facilityTitle: '1741 W Nursery Rd. - Aloft BWI Lot'
-    }
-];
 
 class AutocompleteInput extends Component {
     constructor(props) {
@@ -111,20 +89,15 @@ class AutocompleteInput extends Component {
     }
 
     componentWillMount() {
-        const ds = new ListView.DataSource({
-            rowHasChanged: (r1, r2) => {
-                return r1 !== r2;
-            }
-        });
-        const data = this.props.data || plates;
-
-        this.dataSource = ds.cloneWithRows(data);
+        this._setListData(this.props.data);
     }
 
     componentWillReceiveProps(nextProps) {
         this.setState({
             value: nextProps.value
         });
+
+        this._setListData(nextProps.data);
     }
 
     _onFocus = () => {
@@ -144,10 +117,6 @@ class AutocompleteInput extends Component {
             onChangeText
         } = this.props;
 
-        this.setState({
-            value: text
-        });
-
         this._shouldShowClearButton(text);
 
         if (onChangeText) {
@@ -165,8 +134,23 @@ class AutocompleteInput extends Component {
         this.clearInput();
     }
 
-    _onPredicitionClick = prediction => {
+    _onPredictionPress = prediction => {
+        const {
+            onPredictionSelect
+        } = this.props;
+
         console.log(prediction);
+        onPredictionSelect(prediction);
+    }
+
+    _setListData = data => {
+        const ds = new ListView.DataSource({
+            rowHasChanged: (r1, r2) => {
+                return r1 !== r2;
+            }
+        });
+
+        this.dataSource = ds.cloneWithRows(data);
     }
 
     _shouldShowClearButton = value => {
@@ -184,8 +168,6 @@ class AutocompleteInput extends Component {
         } = this.props;
 
         this.setState({
-            value: '',
-            focus: false,
             showClearButton: false
         });
 
@@ -241,7 +223,7 @@ class AutocompleteInput extends Component {
 
     renderRow = prediction => {
         const onRowPress = () => {
-            this._onPredicitionClick(prediction);
+            this._onPredictionPress(prediction);
         };
 
         return (
@@ -365,6 +347,7 @@ AutocompleteInput.propTypes = {
     onBlur: PropTypes.func,
     onChangeText: PropTypes.func,
     onFocus: PropTypes.func,
+    onPredictionSelect: PropTypes.func,
     onInputCleared: PropTypes.func,
     underlineColorAndroid: PropTypes.string
 };
