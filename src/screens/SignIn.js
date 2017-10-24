@@ -6,11 +6,10 @@ import {
 } from 'react-native';
 import {
     Card,
-    Button,
-    FormLabel,
-    FormInput
+    Button
 } from 'react-native-elements';
 import {onSignIn} from '../auth';
+import FormInput from '../components/FormInput';
 
 export default class SignIn extends Component {
     _onButtonPress = () => {
@@ -42,18 +41,17 @@ export default class SignIn extends Component {
                     />
                 </View>
                 <Card style={{borderWidth: 0}}>
-                    <FormLabel>Email</FormLabel>
                     <FormInput
                         autoCapitalize="none"
                         placeholder="Email address..."
+                        labelText="Email"
                     />
-                    <FormLabel>Password</FormLabel>
                     <FormInput
                         secureTextEntry
                         autoCapitalize="none"
                         placeholder="Password..."
+                        labelText="Password"
                     />
-        
                     <Button
                         buttonStyle={{marginTop: 20}}
                         backgroundColor="#0082ff"

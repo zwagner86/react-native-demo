@@ -1,5 +1,8 @@
 import React from 'react';
+import {Provider} from 'react-redux';
+import {createStore} from 'redux';
 import {createRootNavigator} from './router';
+import reducers from './modules';
 import {isSignedIn} from './auth';
 
 export default class App extends React.Component {
@@ -28,6 +31,10 @@ export default class App extends React.Component {
 
         const Layout = createRootNavigator(signedIn);
         
-        return <Layout />;
+        return (
+            <Provider store={createStore(reducers)}>
+                <Layout />
+            </Provider>
+        );
     }
 }

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {View, Image, Platform} from 'react-native';
-import {Card, Button, FormLabel, FormInput} from 'react-native-elements';
+import {Card, Button} from 'react-native-elements';
 import {onSignIn} from '../auth';
+import FormInput from '../components/FormInput';
 
 export default class SignUp extends Component {
     _onSignUpButtonPress = () => {
@@ -33,24 +34,23 @@ export default class SignUp extends Component {
                     />
                 </View>
                 <Card style={{borderWidth: 0}}>
-                    <FormLabel>Email</FormLabel>
                     <FormInput
                         autoCapitalize="none"
                         placeholder="Email address..."
+                        labelText="Email"
                     />
-                    <FormLabel>Password</FormLabel>
                     <FormInput
                         secureTextEntry
                         autoCapitalize="none"
                         placeholder="Password..."
+                        labelText="Password"
                     />
-                    <FormLabel>Confirm Password</FormLabel>
                     <FormInput
                         secureTextEntry
                         autoCapitalize="none"
                         placeholder="Confirm Password..."
+                        labelText="Confirm Password"
                     />
-        
                     <Button
                         buttonStyle={{marginTop: 20}}
                         backgroundColor="#0082ff"
