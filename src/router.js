@@ -68,8 +68,24 @@ export const SignedIn = TabNavigator(
     },
     {
         tabBarOptions: {
+            ...Platform.select({
+                android: {
+                    activeTintColor: 'white',
+                },
+                ios: {
+                    activeTintColor: '#002d5b',
+                }
+            }),
+            indicatorStyle: {
+                backgroundColor: '#1dbd71'
+            },
             style: {
-                paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0
+                paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+                ...Platform.select({
+                    android: {
+                        backgroundColor: '#002d5b'
+                    }
+                })
             }
         }
     }

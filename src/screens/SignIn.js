@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import {
-    Platform,
     View,
     Image
 } from 'react-native';
-import {
-    Card,
-    Button
-} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 import {onSignIn} from '../auth';
+import Button from '../components/Button';
 import FormInput from '../components/FormInput';
 
 export default class SignIn extends Component {
@@ -34,7 +31,7 @@ export default class SignIn extends Component {
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column', paddingVertical: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 20}}>
                     <Image
                         style={{resizeMode: 'contain', width: 120, height: 120}}
                         source={require('../images/sh_logo.png')}
@@ -54,9 +51,7 @@ export default class SignIn extends Component {
                     />
                     <Button
                         buttonStyle={{marginTop: 20}}
-                        backgroundColor="#0082ff"
-                        title="SIGN IN"
-                        borderRadius={Platform.OS === 'android' ? 0 : 50}
+                        title="Sign In"
                         onPress={this._onButtonPress}
                     />
                     <Button

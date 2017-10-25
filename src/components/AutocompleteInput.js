@@ -15,28 +15,20 @@ import FormInput from './FormInput';
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
     listViewContainer: {
-        flex: 1,
-        maxHeight: 250
+        maxHeight: 100
     },
     listView: {
         width: width - 40,
-        zIndex: 2000,
-        maxHeight: 250,
-        backgroundColor: 'white',
+        maxHeight: 100,
         marginHorizontal: 20,
         marginVertical: 5,
         borderTopWidth: 0.5,
         borderBottomWidth: 0.5,
-        borderLeftWidth: 0.5,
-        borderRightWidth: 0.5,
-        borderColor: '#bdc6cf',
-        position: 'absolute'
+        borderColor: '#bdc6cf'
     },
     listItem: {
         flex: 1,
-        padding: 10,
-        borderBottomWidth: 0.5,
-        borderColor: '#bdc6cf'
+        padding: 10
     }
 });
 
@@ -97,7 +89,7 @@ class AutocompleteInput extends Component {
                 onPress={onRowPress}
                 style={styles.listItem}
             >
-                <Text>{item.title}</Text>
+                <Text style={{color: '#0082ff'}}>{item.title}</Text>
             </TouchableOpacity>
         );
     }

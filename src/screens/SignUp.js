@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import {View, Image, Platform} from 'react-native';
-import {Card, Button} from 'react-native-elements';
+import {Card} from 'react-native-elements';
 import {onSignIn} from '../auth';
+import Button from '../components/Button';
 import FormInput from '../components/FormInput';
 
 export default class SignUp extends Component {
@@ -27,7 +28,7 @@ export default class SignUp extends Component {
     render() {
         return (
             <View style={{flex: 1, flexDirection: 'column', paddingVertical: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+                <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 20}}>
                     <Image
                         style={{resizeMode: 'contain', width: 120, height: 120}}
                         source={require('../images/sh_logo.png')}
@@ -54,8 +55,7 @@ export default class SignUp extends Component {
                     <Button
                         buttonStyle={{marginTop: 20}}
                         backgroundColor="#0082ff"
-                        title="SIGN UP"
-                        borderRadius={Platform.OS === 'android' ? 0 : 50}
+                        title="Sign Up"
                         onPress={this._onSignUpButtonPress}
                     />
                     <Button
