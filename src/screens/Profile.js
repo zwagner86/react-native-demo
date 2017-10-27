@@ -1,8 +1,39 @@
 import React, {Component} from 'react';
-import {View} from 'react-native';
-import {Card, Text} from 'react-native-elements';
+import {
+    StyleSheet,
+    View
+} from 'react-native';
+import {
+    Card,
+    Text
+} from 'react-native-elements';
 import {onSignOut} from '../auth';
 import Button from '../components/Button';
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#ffffff',
+        paddingVertical: 20
+    },
+    card: {
+        borderWidth: 0,
+        padding: 20
+    },
+    cardContent: {
+        backgroundColor: '#bcbec1',
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 80,
+        height: 80,
+        borderRadius: 40,
+        alignSelf: 'center',
+        marginBottom: 20
+    },
+    initials: {
+        color: 'white',
+        fontSize: 28
+    }
+});
 
 export default class Profile extends Component {
     _onButtonPress = () => {
@@ -18,24 +49,15 @@ export default class Profile extends Component {
 
     render() {
         return (
-            <View style={{backgroundColor: '#ffffff', paddingVertical: 20}}>
+            <View style={styles.container}>
                 <Card
                     title="John Doe"
-                    style={{borderWidth: 0, padding: 20}}
+                    style={styles.card}
                 >
-                    <View
-                        style={{
-                            backgroundColor: '#bcbec1',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            width: 80,
-                            height: 80,
-                            borderRadius: 40,
-                            alignSelf: 'center',
-                            marginBottom: 20
-                        }}
-                    >
-                        <Text style={{color: 'white', fontSize: 28}}>JD</Text>
+                    <View style={styles.cardContent}>
+                        <Text style={styles.initials}>
+                            JD
+                        </Text>
                     </View>
                     <Button
                         title="Sign Out"

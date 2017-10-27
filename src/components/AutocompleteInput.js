@@ -29,27 +29,18 @@ const styles = StyleSheet.create({
     listItem: {
         flex: 1,
         padding: 10
+    },
+    listItemText: {
+        color: '#0082ff'
     }
 });
 
 class AutocompleteInput extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            value: this.props.value
-        };
-    }
-
     componentWillMount() {
         this._setListData(this.props.data);
     }
 
     componentWillReceiveProps(nextProps) {
-        this.setState({
-            value: nextProps.value
-        });
-
         this._setListData(nextProps.data);
     }
 
@@ -89,17 +80,19 @@ class AutocompleteInput extends Component {
                 onPress={onRowPress}
                 style={styles.listItem}
             >
-                <Text style={{color: '#0082ff'}}>{item.title}</Text>
+                <Text style={styles.listItemText}>
+                    {item.title}
+                </Text>
             </TouchableOpacity>
         );
     }
 
     _renderNoResults = ({item}) => {
         return (
-            <View
-                style={styles.listItem}
-            >
-                <Text>{item.title}</Text>
+            <View style={styles.listItem}>
+                <Text>
+                    {item.title}
+                </Text>
             </View>
         );
     }
@@ -155,11 +148,9 @@ class AutocompleteInput extends Component {
             onChangeText,
             onChange,
             onBlur,
-            onFocus
-        } = this.props;
-        const {
+            onFocus,
             value
-        } = this.state;
+        } = this.props;
 
         return (
             <View>

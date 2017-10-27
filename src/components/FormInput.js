@@ -1,4 +1,3 @@
-import isEmpty from 'lodash/isEmpty';
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -18,11 +17,7 @@ import {
 
 const {width} = Dimensions.get('window');
 const styles = StyleSheet.create({
-    containerStyle: {
-        //flex: 1,
-        //flexDirection: 'column',
-        //justifyContent: 'flex-start'
-    },
+    containerStyle: {},
     labelStyle: {
         marginLeft: 20,
         marginRight: 20,
@@ -70,16 +65,20 @@ const FormInput = ({
     return (
         <View style={[styles.containerStyle, containerStyle]}>
             {labelText &&
-                <FormLabel labelStyle={[styles.labelStyle, labelStyle]}>{labelText}</FormLabel>
+                <FormLabel labelStyle={[styles.labelStyle, labelStyle]}>
+                    {labelText}
+                </FormLabel>
             }
             <FormInputElement
                 containerStyle={styles.inputContainerStyle}
                 inputStyle={[styles.inputStyle, inputStyle]}
-                {...inputProps}
                 underlineColorAndroid={underlineColorAndroid || 'transparent'}
+                {...inputProps}
             />
             {errorText &&
-                <FormValidationMessage labelStyle={errorStyle}>{errorText}</FormValidationMessage>
+                <FormValidationMessage labelStyle={errorStyle}>
+                    {errorText}
+                </FormValidationMessage>
             }
         </View>
     );

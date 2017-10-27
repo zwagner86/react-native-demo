@@ -1,12 +1,40 @@
 import React, {Component} from 'react';
 import {
     View,
-    Image
+    Image,
+    StyleSheet
 } from 'react-native';
 import {Card} from 'react-native-elements';
 import {onSignIn} from '../auth';
 import Button from '../components/Button';
 import FormInput from '../components/FormInput';
+
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingVertical: 20
+    },
+    logoContainer: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        paddingVertical: 20
+    },
+    logo: {
+        resizeMode: 'contain',
+        width: 120,
+        height: 120
+    },
+    card: {
+        borderWidth: 0
+    },
+    button: {
+        marginTop: 20
+    },
+    signOutButtonText: {
+        color: '#bcbec1'
+    }
+});
 
 export default class SignIn extends Component {
     _onButtonPress = () => {
@@ -30,14 +58,14 @@ export default class SignIn extends Component {
 
     render() {
         return (
-            <View style={{flex: 1, flexDirection: 'column', paddingVertical: 20}}>
-                <View style={{flexDirection: 'row', justifyContent: 'center', paddingVertical: 20}}>
+            <View style={styles.container}>
+                <View style={styles.logoContainer}>
                     <Image
-                        style={{resizeMode: 'contain', width: 120, height: 120}}
+                        style={styles.logo}
                         source={require('../images/sh_logo.png')}
                     />
                 </View>
-                <Card style={{borderWidth: 0}}>
+                <Card style={styles.card}>
                     <FormInput
                         autoCapitalize="none"
                         placeholder="Email address..."
@@ -50,14 +78,14 @@ export default class SignIn extends Component {
                         labelText="Password"
                     />
                     <Button
-                        buttonStyle={{marginTop: 20}}
+                        buttonStyle={styles.button}
                         title="Sign In"
                         onPress={this._onButtonPress}
                     />
                     <Button
-                        buttonStyle={{marginTop: 20}}
+                        buttonStyle={styles.button}
                         backgroundColor="transparent"
-                        textStyle={{color: '#bcbec1'}}
+                        textStyle={styles.signOutButtonText}
                         title="Sign Up"
                         onPress={this._onSignUpButtonPress}
                     />
